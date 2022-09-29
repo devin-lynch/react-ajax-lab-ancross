@@ -8,6 +8,7 @@ export default function App() {
   let [data, setData] = useState({villagers: []})
   // search input
   let [search, setSearch] = useState('')
+  // favorited villagers
   let [faves, setFaves] = useState([])
 
   useEffect(() => {
@@ -30,7 +31,7 @@ export default function App() {
     return filteredVillagers
   }
 
-  getFilteredVillagers()
+  const handleClick = villager => setFaves([...faves, villager])
 
   return (
     <div className="App">
@@ -42,10 +43,24 @@ export default function App() {
         onChange={e => setSearch(e.target.value)}
       />
 
-      <DisplayCards
-        villagers={getFilteredVillagers()}
-      />
-    
+      <div style={{ display: 'flex' }}>
+        <div>
+          <h1>Searched Villagers:</h1>
+
+          <DisplayCards
+            villagers={getFilteredVillagers()}
+            handleClick={handleClick}
+          />
+        </div>
+
+        <div>
+          <h1>Faved Villagers:</h1>
+
+          <DisplayCards
+            villagers={faves}
+          />
+        </div>
+      </div>  
     </div>
   );
 }
