@@ -31,7 +31,11 @@ export default function App() {
     return filteredVillagers
   }
 
-  const handleClick = villager => setFaves([...faves, villager])
+  const handleClick = villager => {
+    if (faves.indexOf(villager) === -1) {
+      setFaves([...faves, villager])
+    }
+  }
 
   return (
     <div className="App">
@@ -58,6 +62,7 @@ export default function App() {
 
           <DisplayCards
             villagers={faves}
+            handleClick={handleClick}
           />
         </div>
       </div>  
